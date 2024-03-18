@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>try-htmx</title>
+  <script src="https://unpkg.com/htmx.org"></script>
+  <script src="https://unpkg.com/htmx.org/dist/ext/client-side-templates.js"></script>
+  <script src="https://unpkg.com/mustache@latest"></script>
+</head>
+
+<body>
+  <div hx-ext="client-side-templates">
+    <input type="search" name="search" hx-get="/api/users" hx-swap="innerHTML" hx-target="#content"
+      mustache-template="users" hx-trigger="load, keyup changed delay:500ms, search">
+    <div id="content"></div>
+    <template id="users">
+      <ul>
+        {{#.}}
+        <li>{{id}} : {{name}}</li>
+        {{/.}}
+      </ul>
+    </template>
+  </div>
+</body>
+
+</html>
